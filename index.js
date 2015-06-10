@@ -2,6 +2,13 @@
 // it to the server variable
 // its exported functions then become free to use
 var server = require("./server");
-var router = require("./route");
+var router = require("./router");
+var requestHandlers = require("./requestHandlers");
 
-server.start(router.route);
+var handle = {};
+handle["/"] = requestHandlers.start;
+handle["/start"] = requestHandlers.start;
+handle["/upload"] = requestHandlers.upload;
+handle["/show"] = requestHandlers.show;
+
+server.start(router.route, handle);
